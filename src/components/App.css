@@ -18,6 +18,14 @@
   /*filter: blur(2px);*/
 }
 
-div.container {
-  marign: 0 5rem;
+div.box{
+  margin: 1rem 5rem;
+}
+
+h2{
+  text-align: center;
+}
+
+section{
+  margin: 3rem 0;
 }

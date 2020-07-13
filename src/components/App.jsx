@@ -12,10 +12,10 @@ export default function App() {
   return (
     <div className="img-container container-fluid">
       <Header />
-      <div className="container">
+      <div className="box">
         <Switch>
-          <Route path="/:id" component={SinglePost} />
           <Route path="/addPost" component={AddPost} />
+          <Route path="/:slug" component={SinglePost} />
           <Route path="/" exact component={Posts} />
         </Switch>
       </div>

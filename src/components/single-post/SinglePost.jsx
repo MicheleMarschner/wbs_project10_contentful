@@ -9,8 +9,9 @@ import { useSinglePost } from "../../custom-hooks";
 import "./SinglePost.css";
 
 export default function SinglePost() {
-  const { id } = useParams();
-  const [post, isLoading] = useSinglePost(id);
+  const { slug } = useParams(); //automate-with-webhooks
+  const [post, isLoading] = useSinglePost(slug);
+
 
   const readableDate = dateString => new Date(dateString).toDateString();
 
@@ -41,12 +42,12 @@ export default function SinglePost() {
   };
 
   return (
-    <div className="post">
+    <section className="post">
       <Link className="post__back" to="/">
         {"< Back"}
       </Link>
 
       {renderPost()}
-    </div>
+    </section>
   );
 }

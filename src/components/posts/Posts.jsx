@@ -10,8 +10,8 @@ import { usePosts } from "../../custom-hooks/";
 import "./Posts.css";
 
 export default function Posts() {
-  const [posts, isLoading] = usePosts();
-  console.log(posts[1]);
+  const [posts, isLoading] = usePosts(); // [response.items, false];
+  console.log(posts[0]);
 
   const readableDate = dateString => new Date(dateString).toDateString();
 
@@ -20,7 +20,7 @@ export default function Posts() {
     //<small> is just like <strong>
     return posts.map(post => (
       <div className="responsive-card-wrapper">
-        <Link className="posts__post" key={post.slug} to={post.slug}>
+        <Link className="posts__post" key={post.slug} to={post.slug==="your-article"? "/addPost" : post.slug}>
           <div className="card responsive">
             {post.heroImage && (
               <div
@@ -51,11 +51,11 @@ export default function Posts() {
 
   //??needed to immediately invoke renderPosts ala ()
   return (
-    <div className="posts__container">
+    <section className="posts__container">
       <h2>Articles</h2>
 
       <div className="posts">{renderPosts()}</div>
-    </div>
+    </section>
   );
 }
 

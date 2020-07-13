@@ -1,44 +1,16 @@
 import React, { useState } from "react";
-import * as contentfulMgmt from "contentful-management";
+import { Link } from "react-router-dom";
 
+import {savePost} from "../../contentful-mgmt";
 import "./AddPost.css";
 
-const managementToken = "CFPAT-MmwiMN8jskUaXtik8XYd6eYNdUF9Axmp7nAnIf8jQtI";
-const spaceId = "hpbqnf8cqvir";
 
-export default function AddPosts() {
+
+export default function AddPost() {
   const [userInput, setUserInput] = useState({
     title: "",
     description: ""
   });
-
-  //TODO: gehört später als initial setup in contentful.js
-  //I just added "new" to Promise but is this really right? Isn't like that in the original example
-  async function savePost({ post }) {
-    return new Promise(async (resolve, reject) => {
-      const client = contentfulMgmt.createClient({
-        accessToken: managementToken
-      });
-
-      const space = await client.getSpace(spaceId);
-      const environment = await space.getEnvironment("master");
-      environment
-        .createEntry("blogPost", {
-          fields: {
-            title: { "en-US": `${post.title}` },
-            slug: { "en-US": `${post.title}` },
-            description: { "en-US": `${post.description}` },
-            body: { "en-US": `${post.body}` },
-            //author: { "en-US": `${post.author}` },
-            publishDate: { "en-US": `${post.publishDate}` },
-            tags: {}
-          }
-        })
-        .then(entry => entry.publish())
-        .then(asset => console.log(asset))
-        .catch(console.error);
-    });
-  }
 
   const handleChange = e => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
@@ -57,9 +29,15 @@ export default function AddPosts() {
   };
 
   return (
-    <div className="post">
-      <h2>Enter New Blog Post</h2>
-      <form onSubmit={e => handleSubmit(e)}>
+    <section className="post">
+      <Link className="post__back" to="/">
+        {"< Back"}
+      </Link>
+
+      <div>
+        <div className="post__intro">
+          <h2 className="post__intro__title">Enter New Blog Post</h2>
+          <form onSubmit={e => handleSubmit(e)}>
         <div>
           <label>Title</label>
           <input
@@ -107,6 +85,8 @@ export default function AddPosts() {
 
         <button type="submit">send</button>
       </form>
-    </div>
+        </div>       
+      </div>
+    </section>
   );
 }
