@@ -1,0 +1,23 @@
+.img-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.img-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/bg_15.png")
+    no-repeat center;
+  background-attachment: fixed;
+  filter: opacity(0.4);
+  /*filter: blur(2px);*/
+}
+
+div.container {
+  marign: 0 5rem;
+}
