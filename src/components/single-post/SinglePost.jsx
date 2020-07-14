@@ -9,8 +9,8 @@ import { useSinglePost } from "../../custom-hooks";
 import "./SinglePost.css";
 
 export default function SinglePost() {
-  const { slug } = useParams(); //automate-with-webhooks
-  const [post, isLoading] = useSinglePost(slug);
+  const { id } = useParams(); //automate-with-webhooks
+  const [post, isLoading] = useSinglePost(id);
 
 
   const readableDate = dateString => new Date(dateString).toDateString();

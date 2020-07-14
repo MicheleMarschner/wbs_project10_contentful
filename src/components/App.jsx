@@ -15,7 +15,7 @@ export default function App() {
       <div className="box">
         <Switch>
           <Route path="/addPost" component={AddPost} />
-          <Route path="/:slug" component={SinglePost} />
+          <Route path="/:id" component={SinglePost} />
           <Route path="/" exact component={Posts} />
         </Switch>
       </div>

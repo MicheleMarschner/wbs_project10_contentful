@@ -20,9 +20,6 @@ export default function AddPost() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    let date = new Date();
-    setUserInput({ ...userInput, publishDate: date });
-
     let post = userInput;
     savePost({ post });
     setUserInput({});
@@ -70,7 +67,13 @@ export default function AddPost() {
 
         <div>
           <label>Image</label>
-          <input type="file" />
+          <input 
+            name="heroImage" 
+            value={userInput.image || ""}
+            type="file" 
+            accept="image/png, image/jpeg"
+            onChange={handleChange}
+          />
         </div>
 
         <div>
@@ -83,7 +86,7 @@ export default function AddPost() {
           />
         </div>
 
-        <button type="submit">send</button>
+        <button className="submit" type="submit">send</button>
       </form>
         </div>       
       </div>
