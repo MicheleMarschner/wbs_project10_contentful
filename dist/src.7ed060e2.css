@@ -93,6 +93,7 @@ form textarea {
   border: 1px solid #bebebe;
   padding: 7px;
   margin: 0px;
+  transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -112,20 +113,20 @@ form textarea:focus {
   border: 1px solid #88d5e9;
 }
 
-form button {
+.submit {
   border: none;
   min-width: 20rem;
   height: 2rem;
   cursor: pointer;
   background: none;
   font-family: "Montserrat Subrayada", sans-serif;
-  font-size: 20px;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: 500ms;
-  margin-top: 1.2rem;
-
+  margin-top: 1.8rem;
+  z-index: 1;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -135,8 +136,8 @@ form button {
   -webkit-tap-highlight-color: transparent;
 }
 
-form button:before {
-  background: #7490e8;
+.submit:before {
+  background: #586997;
   width: 80px;
   height: 10px;
   content: "";
@@ -146,12 +147,16 @@ form button:before {
   z-index: -1;
 }
 
-form button:hover:before {
+.submit:hover:before {
   height: 2rem;
   transform: translateY(0px);
 }
 
-form button:focus {
+.submit:hover {
+ color: white;
+}
+
+.submit:focus {
   outline: none;
 }
 

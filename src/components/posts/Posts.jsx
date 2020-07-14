@@ -11,7 +11,7 @@ import "./Posts.css";
 
 export default function Posts() {
   const [posts, isLoading] = usePosts(); // [response.items, false];
-  console.log(posts[0]);
+  posts.map(ele => console.log(ele.heroImage));
 
   const readableDate = dateString => new Date(dateString).toDateString();
 

@@ -1,5 +1,6 @@
 import * as contentfulMgmt from "contentful-management";
 require("babel-polyfill");
+import moment from "moment";
 
 const managementToken = "CFPAT-MmwiMN8jskUaXtik8XYd6eYNdUF9Axmp7nAnIf8jQtI";
 const spaceId = "hpbqnf8cqvir";
@@ -19,6 +20,32 @@ const spaceId = "hpbqnf8cqvir";
 
       const space = await client.getSpace(spaceId);
       const environment = await space.getEnvironment("master");
+
+     let image = environment.createAsset({
+        fields: {
+        title: {
+          'en-US': 'Playsam Streamliner'
+        },
+        description: {
+          'en-US': 'Streamliner description'
+        },
+        file: {
+          'en-US': {
+            contentType: 'image/png',
+            fileName: 'example.png',
+            upload: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/bg_15.png' //`${post.imageUrl}`
+          }
+        }
+      }
+    })
+    .then((asset) => asset.processForAllLocales())
+    .then((asset) => asset.publish())
+    .then((asset) => createPost(asset))
+    .catch(console.error)
+
+    console.log(image);
+    
+    const createPost = (image) => {
       environment
         .createEntry("blogPost", {
           fields: {
@@ -26,16 +53,60 @@ const spaceId = "hpbqnf8cqvir";
             slug: { "en-US": `${post.title}` },
             description: { "en-US": `${post.description}` },
             body: { "en-US": `${post.body}` },
-            //author: { "en-US": `${post.author}` },
-            //publishDate: { "en-US": `${post.publishDate}` },
+            heroImage: {
+              "en-US": {
+                'sys': {
+                  'id': image.sys['id'],
+                  'linkType': 'Asset',
+                  'type': 'Link',
+              }
+                  }
+                
+              
+            }, //author: { "en-US": `${post.author}` },
+            publishDate: { "en-US": moment().format() },
             tags: {}
           }
         })
         .then(entry => entry.publish())
         .then(asset => console.log(asset))
         .catch(console.error);
+    }  
+      
+
+
+      
+
     });
+
+
+
   }
 
 
   export {savePost};
+
+
+
+
+  /*environment.createAssetFromFiles({
+        fields: {
+          title: {
+            'en-US': 'Asset title'
+          },
+          description: {
+            'en-US': 'Asset description'
+          },
+          file: {
+            'en-US': {
+              contentType: 'image/svg+xml',
+              fileName: 'circle.svg',
+              file: '<svg><path fill="red" d="M50 50h150v50H50z"/></svg>'
+            }
+          }
+        }
+      }))
+      .then((asset) => asset.processForAllLocales())
+      .then((asset) => asset.publish())
+      .catch(console.error)
+*/

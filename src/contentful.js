@@ -21,6 +21,22 @@ const getBlogPosts = () =>
     .then(response => response.items)
     .catch(console.error);
 
+    
+    /*client.getEntries({
+      links_to_asset: '4NzwDSDlGECGIiokKomsyI'
+    })
+    .then((response) => console.log(response.items))
+    .catch(console.error)
+    */
+
+    client.getAssets().then(console.log);
+    client.getAssets({
+      links_to_entry: '2PtC9h1YqIA6kaUaIsWEQ0'
+    })
+    .then(console.log)
+    .catch(console.error)
+
+
 const getSinglePost = slug =>
   client
     .getEntries({
