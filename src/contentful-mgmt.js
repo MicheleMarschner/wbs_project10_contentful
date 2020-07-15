@@ -21,7 +21,7 @@ const spaceId = "hpbqnf8cqvir";
       const space = await client.getSpace(spaceId);
       const environment = await space.getEnvironment("master");
 
-     let image = environment.createAsset({
+     await environment.createAsset({
         fields: {
         title: {
           'en-US': 'Playsam Streamliner'
@@ -43,7 +43,7 @@ const spaceId = "hpbqnf8cqvir";
     .then((asset) => createPost(asset))
     .catch(console.error)
 
-    console.log(image);
+   
     
     const createPost = (image) => {
       environment
