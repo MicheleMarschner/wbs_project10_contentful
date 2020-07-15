@@ -29,13 +29,13 @@ export default function Header() {
               <mask id="mask" x="0" y="0" width="100%" height="100%">
                 <rect id="alpha" x="0" y="0" width="100%" height="100%" />
                 <text class="title" dx="50%" dy="2.5em">
-                  ENJOY
+                  BLOG
                 </text>
                 <text class="title" dx="50%" dy="3.5em">
-                  EVERY
+                  EXAMPLE
                 </text>
                 <text class="title" dx="50%" dy="4.5em">
-                  MOMENT
+                  GROUP 1
                 </text>
               </mask>
             </defs>
@@ -43,8 +43,7 @@ export default function Header() {
           </svg>
           <div class="body">
             <p>
-              Enamel pin selvage health goth edison bulb, venmo glossier
-              tattooed hella butcher cred iPhone.
+              This Blog can be updated via contentful. Users can also add blog posts in the app itselfs.
             </p>
           </div>
         </figcaption>

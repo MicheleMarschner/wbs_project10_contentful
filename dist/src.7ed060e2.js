@@ -32375,15 +32375,15 @@ function Header() {
     class: "title",
     dx: "50%",
     dy: "2.5em"
-  }, "ENJOY"), /*#__PURE__*/_react.default.createElement("text", {
+  }, "BLOG"), /*#__PURE__*/_react.default.createElement("text", {
     class: "title",
     dx: "50%",
     dy: "3.5em"
-  }, "EVERY"), /*#__PURE__*/_react.default.createElement("text", {
+  }, "EXAMPLE"), /*#__PURE__*/_react.default.createElement("text", {
     class: "title",
     dx: "50%",
     dy: "4.5em"
-  }, "MOMENT"))), /*#__PURE__*/_react.default.createElement("rect", {
+  }, "GROUP 1"))), /*#__PURE__*/_react.default.createElement("rect", {
     id: "base",
     x: "0",
     y: "0",
@@ -32391,7 +32391,7 @@ function Header() {
     height: "100%"
   })), /*#__PURE__*/_react.default.createElement("div", {
     class: "body"
-  }, /*#__PURE__*/_react.default.createElement("p", null, "Enamel pin selvage health goth edison bulb, venmo glossier tattooed hella butcher cred iPhone.")))));
+  }, /*#__PURE__*/_react.default.createElement("p", null, "This Blog can be updated via contentful. Users can also add blog posts in the app itselfs.")))));
 }
 /*
 <div className="container-fluid mb-4">
@@ -58682,7 +58682,7 @@ function _savePost() {
             post = _ref.post;
             return _context2.abrupt("return", new Promise( /*#__PURE__*/function () {
               var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(resolve, reject) {
-                var client, space, environment, image, createPost;
+                var client, space, environment, createPost;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
@@ -58705,7 +58705,8 @@ function _savePost() {
 
                       case 7:
                         environment = _context.sent;
-                        image = environment.createAsset({
+                        _context.next = 10;
+                        return environment.createAsset({
                           fields: {
                             title: {
                               'en-US': 'Playsam Streamliner'
@@ -58729,8 +58730,8 @@ function _savePost() {
                         }).then(function (asset) {
                           return createPost(asset);
                         }).catch(console.error);
-                        console.log(image);
 
+                      case 10:
                         createPost = function createPost(image) {
                           environment.createEntry("blogPost", {
                             fields: {
@@ -69509,7 +69510,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62968" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58974" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
