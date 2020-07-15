@@ -54,7 +54,7 @@ svg #alpha {
 svg .title {
   font-size: 28px;
   font-weight: bold;
-  font-family: "Montserrat";
+  font-family: "Nunito";
   letter-spacing: 5px;
 }
 svg #base {
@@ -303,8 +303,7 @@ h2 {
   left: 0;
   height: 100%;
   width: 100%;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/bg_15.png")
-    no-repeat center;
+  background: url("/bg.21ac9516.jpg") no-repeat center;
   background-attachment: fixed;
   filter: opacity(0.4);
   /*filter: blur(2px);*/
