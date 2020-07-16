@@ -2,8 +2,8 @@ import * as contentfulMgmt from "contentful-management";
 require("babel-polyfill");
 import moment from "moment";
 
-const managementToken = "CFPAT-MmwiMN8jskUaXtik8XYd6eYNdUF9Axmp7nAnIf8jQtI";
-const spaceId = "hpbqnf8cqvir";
+const managementToken = process.env.REACT_APP_CONTENTFUL_MANAGEMENT_TOKEN;
+const spaceId = process.env.REACT_APP_CONTENTFUL_SPACE_ID;
 
 
 const uploadAsset = async ({ post }, environment) => {

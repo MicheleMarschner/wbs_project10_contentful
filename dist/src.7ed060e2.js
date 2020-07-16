@@ -58911,6 +58911,7 @@ function AddPost() {
     placeholder: "https://example.com",
     pattern: "https://.*",
     size: "30",
+    required: true,
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", null, "Author"), /*#__PURE__*/_react.default.createElement("input", {
     name: "author",
@@ -60528,8 +60529,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 //TO DO: use the process.env from the tutorial - if it's not working try Jorge's solution in Discord-general
 var client = contentful.createClient({
-  space: "hpbqnf8cqvir",
+  space: "hpbqnf8cqvir"
+  /*process.env.REACT_APP_SPACE_ID*/
+  ,
   accessToken: "JyVGvJ2Y4vnoGGE9v-f_wVm5Z0B0uid9LXUzpvRgr4U"
+  /*process.env.REACT_APP_ACCESS_TOKEN*/
+
 });
 
 var getBlogPosts = function getBlogPosts() {
@@ -69488,7 +69493,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52752" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52946" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

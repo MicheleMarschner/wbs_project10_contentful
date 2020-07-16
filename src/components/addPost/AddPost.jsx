@@ -69,6 +69,7 @@ export default function AddPost() {
             placeholder="https://example.com"
             pattern="https://.*"
             size="30"
+            required
             onChange={handleChange}
           />
         </div>
