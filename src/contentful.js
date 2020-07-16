@@ -3,9 +3,8 @@
 import * as contentful from "contentful";
 
 const client = contentful.createClient({
-  space: "hpbqnf8cqvir" /*process.env.REACT_APP_SPACE_ID*/,
-  accessToken:
-    "JyVGvJ2Y4vnoGGE9v-f_wVm5Z0B0uid9LXUzpvRgr4U" /*process.env.REACT_APP_ACCESS_TOKEN*/
+  space:  process.env.REACT_APP_CONTENTFUL_SPACE_ID,
+  accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN
 });
 const getBlogPosts = () =>
   //?? what is slug? works like an id, but is it contentful specific?
