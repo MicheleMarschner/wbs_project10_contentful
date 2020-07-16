@@ -7,34 +7,17 @@ const client = contentful.createClient({
   accessToken:
     "JyVGvJ2Y4vnoGGE9v-f_wVm5Z0B0uid9LXUzpvRgr4U" /*process.env.REACT_APP_ACCESS_TOKEN*/
 });
-//I could put this part in either the App or a PostContainer to give them to posts as props
 const getBlogPosts = () =>
   //?? what is slug? works like an id, but is it contentful specific?
 
   //zeile: 20 --> how to access items rightfully can be looked up with graphql
   //getEntries is predefined and returns a promise
-
   client
     .getEntries({
       content_type: "blogPost"
     })
     .then(response => response.items)
     .catch(console.error);
-
-    
-    /*client.getEntries({
-      links_to_asset: '4NzwDSDlGECGIiokKomsyI'
-    })
-    .then((response) => console.log(response.items))
-    .catch(console.error)
-    */
-
-    client.getAssets().then(console.log);
-    client.getAssets({
-      links_to_entry: '2PtC9h1YqIA6kaUaIsWEQ0'
-    })
-    .then(console.log)
-    .catch(console.error)
 
 
 const getSinglePost = slug =>

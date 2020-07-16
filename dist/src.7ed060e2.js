@@ -58665,24 +58665,92 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 require("babel-polyfill");
 
 var managementToken = "CFPAT-MmwiMN8jskUaXtik8XYd6eYNdUF9Axmp7nAnIf8jQtI";
-var spaceId = "hpbqnf8cqvir"; //TODO: gehört später als initial setup in contentful.js
-//I just added "new" to Promise but is this really right? Isn't like that in the original example
+var spaceId = "hpbqnf8cqvir";
+
+var uploadAsset = function uploadAsset(_ref, environment) {
+  var post = _ref.post;
+  environment.createAsset({
+    fields: {
+      title: {
+        'en-US': 'Playsam Streamliner'
+      },
+      description: {
+        'en-US': 'Streamliner description'
+      },
+      file: {
+        'en-US': {
+          contentType: 'image/png',
+          fileName: 'example.png',
+          upload: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/bg_15.png' //`${post.heroImage}`
+
+        }
+      }
+    }
+  }).then(function (asset) {
+    return asset.processForAllLocales();
+  }).then(function (asset) {
+    return asset.publish();
+  }).then(function (asset) {
+    return createPost({
+      post: post
+    }, asset, environment);
+  }).catch(console.error);
+};
+
+var createPost = function createPost(_ref2, image, environment) {
+  var post = _ref2.post;
+  environment.createEntry("blogPost", {
+    fields: {
+      title: {
+        "en-US": "".concat(post.title)
+      },
+      slug: {
+        "en-US": "".concat(post.title)
+      },
+      description: {
+        "en-US": "".concat(post.description)
+      },
+      body: {
+        "en-US": "".concat(post.body)
+      },
+      heroImage: {
+        "en-US": {
+          'sys': {
+            'id': image.sys['id'],
+            'linkType': 'Asset',
+            'type': 'Link'
+          }
+        }
+      },
+      //author: { "en-US": `${post.author}` },
+      publishDate: {
+        "en-US": (0, _moment.default)().format()
+      },
+      tags: {}
+    }
+  }).then(function (entry) {
+    return entry.publish();
+  }).then(function (asset) {
+    return console.log(asset);
+  }).catch(console.error);
+}; //??I just added "new" to Promise but is this really right? Isn't like that in the original example
+
 
 function savePost(_x) {
   return _savePost.apply(this, arguments);
 }
 
 function _savePost() {
-  _savePost = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(_ref) {
+  _savePost = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(_ref3) {
     var post;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            post = _ref.post;
+            post = _ref3.post;
             return _context2.abrupt("return", new Promise( /*#__PURE__*/function () {
-              var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(resolve, reject) {
-                var client, space, environment, createPost;
+              var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(resolve, reject) {
+                var client, space, environment;
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                   while (1) {
                     switch (_context.prev = _context.next) {
@@ -58690,86 +58758,21 @@ function _savePost() {
                         client = contentfulMgmt.createClient({
                           accessToken: managementToken
                         });
-
-                        exports.onClientEntry = function () {
-                          require('babel-polyfill');
-                        };
-
-                        _context.next = 4;
+                        _context.next = 3;
                         return client.getSpace(spaceId);
 
-                      case 4:
+                      case 3:
                         space = _context.sent;
-                        _context.next = 7;
+                        _context.next = 6;
                         return space.getEnvironment("master");
 
-                      case 7:
+                      case 6:
                         environment = _context.sent;
-                        _context.next = 10;
-                        return environment.createAsset({
-                          fields: {
-                            title: {
-                              'en-US': 'Playsam Streamliner'
-                            },
-                            description: {
-                              'en-US': 'Streamliner description'
-                            },
-                            file: {
-                              'en-US': {
-                                contentType: 'image/png',
-                                fileName: 'example.png',
-                                upload: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/bg_15.png' //`${post.imageUrl}`
+                        uploadAsset({
+                          post: post
+                        }, environment);
 
-                              }
-                            }
-                          }
-                        }).then(function (asset) {
-                          return asset.processForAllLocales();
-                        }).then(function (asset) {
-                          return asset.publish();
-                        }).then(function (asset) {
-                          return createPost(asset);
-                        }).catch(console.error);
-
-                      case 10:
-                        createPost = function createPost(image) {
-                          environment.createEntry("blogPost", {
-                            fields: {
-                              title: {
-                                "en-US": "".concat(post.title)
-                              },
-                              slug: {
-                                "en-US": "".concat(post.title)
-                              },
-                              description: {
-                                "en-US": "".concat(post.description)
-                              },
-                              body: {
-                                "en-US": "".concat(post.body)
-                              },
-                              heroImage: {
-                                "en-US": {
-                                  'sys': {
-                                    'id': image.sys['id'],
-                                    'linkType': 'Asset',
-                                    'type': 'Link'
-                                  }
-                                }
-                              },
-                              //author: { "en-US": `${post.author}` },
-                              publishDate: {
-                                "en-US": (0, _moment.default)().format()
-                              },
-                              tags: {}
-                            }
-                          }).then(function (entry) {
-                            return entry.publish();
-                          }).then(function (asset) {
-                            return console.log(asset);
-                          }).catch(console.error);
-                        };
-
-                      case 11:
+                      case 8:
                       case "end":
                         return _context.stop();
                     }
@@ -58778,7 +58781,7 @@ function _savePost() {
               }));
 
               return function (_x2, _x3) {
-                return _ref2.apply(this, arguments);
+                return _ref4.apply(this, arguments);
               };
             }()));
 
@@ -58856,17 +58859,13 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function AddPost() {
-  var _useState = (0, _react.useState)({
-    title: "",
-    description: ""
-  }),
+  var _useState = (0, _react.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
       userInput = _useState2[0],
       setUserInput = _useState2[1];
 
   var handleChange = function handleChange(e) {
     setUserInput(_objectSpread(_objectSpread({}, userInput), {}, _defineProperty({}, e.target.name, e.target.value)));
-    console.log(userInput);
   };
 
   var handleSubmit = function handleSubmit(e) {
@@ -60534,7 +60533,7 @@ var client = contentful.createClient({
   accessToken: "JyVGvJ2Y4vnoGGE9v-f_wVm5Z0B0uid9LXUzpvRgr4U"
   /*process.env.REACT_APP_ACCESS_TOKEN*/
 
-}); //I could put this part in either the App or a PostContainer to give them to posts as props
+});
 
 var getBlogPosts = function getBlogPosts() {
   return (//?? what is slug? works like an id, but is it contentful specific?
@@ -60547,19 +60546,8 @@ var getBlogPosts = function getBlogPosts() {
     }).catch(console.error)
   );
 };
-/*client.getEntries({
-  links_to_asset: '4NzwDSDlGECGIiokKomsyI'
-})
-.then((response) => console.log(response.items))
-.catch(console.error)
-*/
-
 
 exports.getBlogPosts = getBlogPosts;
-client.getAssets().then(console.log);
-client.getAssets({
-  links_to_entry: '2PtC9h1YqIA6kaUaIsWEQ0'
-}).then(console.log).catch(console.error);
 
 var getSinglePost = function getSinglePost(slug) {
   return client.getEntries({
@@ -60841,12 +60829,6 @@ function Posts() {
     className: "posts"
   }, renderPosts()));
 }
-/*<img
-                    className="post__intro__img"
-                    src={post.heroImage.fields.file.url}
-                    alt={post.title}
-                  />*/
-//to={post.slug === "your-article" ? "/addPost" : post.slug}
 },{"react":"../node_modules/react/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","../../custom-hooks/":"../src/custom-hooks/index.js","./Posts.css":"../src/components/posts/Posts.css"}],"../node_modules/xtend/immutable.js":[function(require,module,exports) {
 module.exports = extend;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -69376,8 +69358,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function SinglePost() {
   var _useParams = (0, _reactRouterDom.useParams)(),
-      id = _useParams.id; //automate-with-webhooks
-
+      id = _useParams.id;
 
   var _useSinglePost = (0, _customHooks.useSinglePost)(id),
       _useSinglePost2 = _slicedToArray(_useSinglePost, 2),
@@ -69421,7 +69402,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./bg.jpg":[["bg.21ac9516.jpg","../src/components/bg.jpg"],"../src/components/bg.jpg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/App.jsx":[function(require,module,exports) {
+},{"./..\\..\\public\\media\\bg.jpg":[["bg.0533242d.jpg","media/bg.jpg"],"media/bg.jpg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/components/App.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -69510,7 +69491,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58974" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60083" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

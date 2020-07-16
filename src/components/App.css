@@ -11,10 +11,10 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: url("bg.jpg") no-repeat center;
+  background: url("../../public/media/bg.jpg") no-repeat center;
   background-attachment: fixed;
   filter: opacity(0.4);
-  /*filter: blur(2px);*/
+  filter: grayscale(0.7);
 }
 
 div.box{

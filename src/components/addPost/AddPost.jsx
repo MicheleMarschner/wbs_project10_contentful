@@ -7,19 +7,14 @@ import "./AddPost.css";
 
 
 export default function AddPost() {
-  const [userInput, setUserInput] = useState({
-    title: "",
-    description: ""
-  });
+  const [userInput, setUserInput] = useState({});
 
   const handleChange = e => {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
-    console.log(userInput);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-
     let post = userInput;
     savePost({ post });
     setUserInput({});

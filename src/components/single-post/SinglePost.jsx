@@ -1,5 +1,3 @@
-//!!To DO: try to erive these songle posts from the Posts jsx to reduce code
-
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import MD from "react-markdown";
@@ -9,7 +7,7 @@ import { useSinglePost } from "../../custom-hooks";
 import "./SinglePost.css";
 
 export default function SinglePost() {
-  const { id } = useParams(); //automate-with-webhooks
+  const { id } = useParams();
   const [post, isLoading] = useSinglePost(id);
 
 

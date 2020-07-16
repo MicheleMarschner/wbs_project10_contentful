@@ -1,6 +1,5 @@
 //!!To DO: insert card expanding effect
 // insert canvas that inserts white triangle
-//overlay over image with header --> from bootstrap cookbook
 
 import React from "react";
 import { Link } from "react-router-dom";
@@ -58,11 +57,3 @@ export default function Posts() {
     </section>
   );
 }
-
-/*<img
-                    className="post__intro__img"
-                    src={post.heroImage.fields.file.url}
-                    alt={post.title}
-                  />*/
-
-//to={post.slug === "your-article" ? "/addPost" : post.slug}
