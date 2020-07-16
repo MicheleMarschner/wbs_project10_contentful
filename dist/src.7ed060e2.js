@@ -60528,12 +60528,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 //TO DO: use the process.env from the tutorial - if it's not working try Jorge's solution in Discord-general
 var client = contentful.createClient({
-  space: "hpbqnf8cqvir"
-  /*process.env.REACT_APP_SPACE_ID*/
-  ,
+  space: "hpbqnf8cqvir",
   accessToken: "JyVGvJ2Y4vnoGGE9v-f_wVm5Z0B0uid9LXUzpvRgr4U"
-  /*process.env.REACT_APP_ACCESS_TOKEN*/
-
 });
 
 var getBlogPosts = function getBlogPosts() {
@@ -69492,7 +69488,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50416" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52752" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
