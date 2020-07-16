@@ -6,8 +6,8 @@ const managementToken = "CFPAT-MmwiMN8jskUaXtik8XYd6eYNdUF9Axmp7nAnIf8jQtI";
 const spaceId = "hpbqnf8cqvir";
 
 
-const uploadAsset = ({ post }, environment) => {
-  environment.createAsset({
+const uploadAsset = async ({ post }, environment) => {
+   const asset = environment.createAsset({
     fields: {
     title: {
       'en-US': 'Playsam Streamliner'
@@ -19,19 +19,19 @@ const uploadAsset = ({ post }, environment) => {
       'en-US': {
         contentType: 'image/png',
         fileName: 'example.png',
-        upload: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/bg_15.png'//`${post.heroImage}`
+        upload: `${post.heroImage}`
       }
     }
   }
 })
 .then((asset) => asset.processForAllLocales())
 .then((asset) => asset.publish())
-.then((asset) => createPost({ post },asset, environment))
 .catch(console.error)
+return asset;
 }
 
 
-const createPost = ({ post },image, environment) => {
+const createPost = async ({ post },image, environment) => {
   environment
     .createEntry("blogPost", {
       fields: {
@@ -53,7 +53,6 @@ const createPost = ({ post },image, environment) => {
       }
     })
     .then(entry => entry.publish())
-    .then(asset => console.log(asset))
     .catch(console.error);
 }  
 
@@ -62,6 +61,7 @@ const createPost = ({ post },image, environment) => {
 
   //??I just added "new" to Promise but is this really right? Isn't like that in the original example
   async function savePost({ post }) {
+
     return new Promise(async (resolve, reject) => {
       const client = contentfulMgmt.createClient({
         accessToken: managementToken
@@ -70,35 +70,11 @@ const createPost = ({ post },image, environment) => {
       const space = await client.getSpace(spaceId);
       const environment = await space.getEnvironment("master");
 
-      uploadAsset({ post }, environment);
-     
+      const asset = await uploadAsset({ post }, environment);
+      await createPost({ post },asset, environment);
+      alert("BlogPost successfully sent");
     });
   }
 
 
   export {savePost};
-
-
-
-
-  /*environment.createAssetFromFiles({
-        fields: {
-          title: {
-            'en-US': 'Asset title'
-          },
-          description: {
-            'en-US': 'Asset description'
-          },
-          file: {
-            'en-US': {
-              contentType: 'image/svg+xml',
-              fileName: 'circle.svg',
-              file: '<svg><path fill="red" d="M50 50h150v50H50z"/></svg>'
-            }
-          }
-        }
-      }))
-      .then((asset) => asset.processForAllLocales())
-      .then((asset) => asset.publish())
-      .catch(console.error)
-*/

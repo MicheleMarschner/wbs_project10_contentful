@@ -64,9 +64,11 @@ export default function AddPost() {
           <label>Image</label>
           <input 
             name="heroImage" 
-            value={userInput.image || ""}
-            type="file" 
-            accept="image/png, image/jpeg"
+            value={userInput.heroImage || ""}
+            type="url"
+            placeholder="https://example.com"
+            pattern="https://.*"
+            size="30"
             onChange={handleChange}
           />
         </div>

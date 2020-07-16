@@ -32343,14 +32343,11 @@ require("./Header.css");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //scrollEffect --> certain heigth = change
-//background Image opacity 0 || overlay opacity 1
-//transition effect
-// body container = transparent
 function Header() {
   return /*#__PURE__*/_react.default.createElement("div", {
-    class: "container-fluid"
+    className: "container-fluid"
   }, /*#__PURE__*/_react.default.createElement("figure", null, /*#__PURE__*/_react.default.createElement("div", {
-    class: "media",
+    className: "media",
     style: {
       backgroundImage: "url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/bg_15.png)"
     }
@@ -32372,15 +32369,15 @@ function Header() {
     width: "100%",
     height: "100%"
   }), /*#__PURE__*/_react.default.createElement("text", {
-    class: "title",
+    className: "title",
     dx: "50%",
     dy: "2.5em"
   }, "BLOG"), /*#__PURE__*/_react.default.createElement("text", {
-    class: "title",
+    className: "title",
     dx: "50%",
     dy: "3.5em"
   }, "EXAMPLE"), /*#__PURE__*/_react.default.createElement("text", {
-    class: "title",
+    className: "title",
     dx: "50%",
     dy: "4.5em"
   }, "GROUP 1"))), /*#__PURE__*/_react.default.createElement("rect", {
@@ -32390,27 +32387,9 @@ function Header() {
     width: "100%",
     height: "100%"
   })), /*#__PURE__*/_react.default.createElement("div", {
-    class: "body"
+    className: "body"
   }, /*#__PURE__*/_react.default.createElement("p", null, "This Blog can be updated via contentful. Users can also add blog posts in the app itselfs.")))));
 }
-/*
-<div className="container-fluid mb-4">
-      <div className="container">
-        <img
-          className="hero-img"
-          src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F2258469.jpg"
-          alt="First slide"
-        />
-        <div className="overlay" />
-        <div className="box">
-          <div className="text-center">
-            <h1>Cookbook 2020</h1>
-            <p>Selection of the best recipes the market has to offer</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    */
 },{"react":"../node_modules/react/index.js","./Header.css":"../src/components/header/Header.css"}],"../node_modules/lodash/_listCacheClear.js":[function(require,module,exports) {
 /**
  * Removes all key-value entries from the list cache.
@@ -58667,123 +58646,90 @@ require("babel-polyfill");
 var managementToken = "CFPAT-MmwiMN8jskUaXtik8XYd6eYNdUF9Axmp7nAnIf8jQtI";
 var spaceId = "hpbqnf8cqvir";
 
-var uploadAsset = function uploadAsset(_ref, environment) {
-  var post = _ref.post;
-  environment.createAsset({
-    fields: {
-      title: {
-        'en-US': 'Playsam Streamliner'
-      },
-      description: {
-        'en-US': 'Streamliner description'
-      },
-      file: {
-        'en-US': {
-          contentType: 'image/png',
-          fileName: 'example.png',
-          upload: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/bg_15.png' //`${post.heroImage}`
+var uploadAsset = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(_ref, environment) {
+    var post, asset;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            post = _ref.post;
+            asset = environment.createAsset({
+              fields: {
+                title: {
+                  'en-US': 'Playsam Streamliner'
+                },
+                description: {
+                  'en-US': 'Streamliner description'
+                },
+                file: {
+                  'en-US': {
+                    contentType: 'image/png',
+                    fileName: 'example.png',
+                    upload: "".concat(post.heroImage)
+                  }
+                }
+              }
+            }).then(function (asset) {
+              return asset.processForAllLocales();
+            }).then(function (asset) {
+              return asset.publish();
+            }).catch(console.error);
+            return _context.abrupt("return", asset);
 
+          case 3:
+          case "end":
+            return _context.stop();
         }
       }
-    }
-  }).then(function (asset) {
-    return asset.processForAllLocales();
-  }).then(function (asset) {
-    return asset.publish();
-  }).then(function (asset) {
-    return createPost({
-      post: post
-    }, asset, environment);
-  }).catch(console.error);
-};
+    }, _callee);
+  }));
 
-var createPost = function createPost(_ref2, image, environment) {
-  var post = _ref2.post;
-  environment.createEntry("blogPost", {
-    fields: {
-      title: {
-        "en-US": "".concat(post.title)
-      },
-      slug: {
-        "en-US": "".concat(post.title)
-      },
-      description: {
-        "en-US": "".concat(post.description)
-      },
-      body: {
-        "en-US": "".concat(post.body)
-      },
-      heroImage: {
-        "en-US": {
-          'sys': {
-            'id': image.sys['id'],
-            'linkType': 'Asset',
-            'type': 'Link'
-          }
-        }
-      },
-      //author: { "en-US": `${post.author}` },
-      publishDate: {
-        "en-US": (0, _moment.default)().format()
-      },
-      tags: {}
-    }
-  }).then(function (entry) {
-    return entry.publish();
-  }).then(function (asset) {
-    return console.log(asset);
-  }).catch(console.error);
-}; //??I just added "new" to Promise but is this really right? Isn't like that in the original example
+  return function uploadAsset(_x, _x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
 
-
-function savePost(_x) {
-  return _savePost.apply(this, arguments);
-}
-
-function _savePost() {
-  _savePost = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(_ref3) {
+var createPost = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(_ref3, image, environment) {
     var post;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             post = _ref3.post;
-            return _context2.abrupt("return", new Promise( /*#__PURE__*/function () {
-              var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(resolve, reject) {
-                var client, space, environment;
-                return regeneratorRuntime.wrap(function _callee$(_context) {
-                  while (1) {
-                    switch (_context.prev = _context.next) {
-                      case 0:
-                        client = contentfulMgmt.createClient({
-                          accessToken: managementToken
-                        });
-                        _context.next = 3;
-                        return client.getSpace(spaceId);
-
-                      case 3:
-                        space = _context.sent;
-                        _context.next = 6;
-                        return space.getEnvironment("master");
-
-                      case 6:
-                        environment = _context.sent;
-                        uploadAsset({
-                          post: post
-                        }, environment);
-
-                      case 8:
-                      case "end":
-                        return _context.stop();
+            environment.createEntry("blogPost", {
+              fields: {
+                title: {
+                  "en-US": "".concat(post.title)
+                },
+                slug: {
+                  "en-US": "".concat(post.title)
+                },
+                description: {
+                  "en-US": "".concat(post.description)
+                },
+                body: {
+                  "en-US": "".concat(post.body)
+                },
+                heroImage: {
+                  "en-US": {
+                    'sys': {
+                      'id': image.sys['id'],
+                      'linkType': 'Asset',
+                      'type': 'Link'
                     }
                   }
-                }, _callee);
-              }));
-
-              return function (_x2, _x3) {
-                return _ref4.apply(this, arguments);
-              };
-            }()));
+                },
+                //author: { "en-US": `${post.author}` },
+                publishDate: {
+                  "en-US": (0, _moment.default)().format()
+                },
+                tags: {}
+              }
+            }).then(function (entry) {
+              return entry.publish();
+            }).catch(console.error);
 
           case 2:
           case "end":
@@ -58792,29 +58738,82 @@ function _savePost() {
       }
     }, _callee2);
   }));
+
+  return function createPost(_x3, _x4, _x5) {
+    return _ref4.apply(this, arguments);
+  };
+}(); //??I just added "new" to Promise but is this really right? Isn't like that in the original example
+
+
+function savePost(_x6) {
   return _savePost.apply(this, arguments);
 }
-/*environment.createAssetFromFiles({
-      fields: {
-        title: {
-          'en-US': 'Asset title'
-        },
-        description: {
-          'en-US': 'Asset description'
-        },
-        file: {
-          'en-US': {
-            contentType: 'image/svg+xml',
-            fileName: 'circle.svg',
-            file: '<svg><path fill="red" d="M50 50h150v50H50z"/></svg>'
-          }
+
+function _savePost() {
+  _savePost = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(_ref5) {
+    var post;
+    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            post = _ref5.post;
+            return _context4.abrupt("return", new Promise( /*#__PURE__*/function () {
+              var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(resolve, reject) {
+                var client, space, environment, asset;
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                  while (1) {
+                    switch (_context3.prev = _context3.next) {
+                      case 0:
+                        client = contentfulMgmt.createClient({
+                          accessToken: managementToken
+                        });
+                        _context3.next = 3;
+                        return client.getSpace(spaceId);
+
+                      case 3:
+                        space = _context3.sent;
+                        _context3.next = 6;
+                        return space.getEnvironment("master");
+
+                      case 6:
+                        environment = _context3.sent;
+                        _context3.next = 9;
+                        return uploadAsset({
+                          post: post
+                        }, environment);
+
+                      case 9:
+                        asset = _context3.sent;
+                        _context3.next = 12;
+                        return createPost({
+                          post: post
+                        }, asset, environment);
+
+                      case 12:
+                        alert("BlogPost successfully sent");
+
+                      case 13:
+                      case "end":
+                        return _context3.stop();
+                    }
+                  }
+                }, _callee3);
+              }));
+
+              return function (_x7, _x8) {
+                return _ref6.apply(this, arguments);
+              };
+            }()));
+
+          case 2:
+          case "end":
+            return _context4.stop();
         }
       }
-    }))
-    .then((asset) => asset.processForAllLocales())
-    .then((asset) => asset.publish())
-    .catch(console.error)
-*/
+    }, _callee4);
+  }));
+  return _savePost.apply(this, arguments);
+}
 },{"contentful-management":"../node_modules/contentful-management/dist/es-modules/contentful-management.js","babel-polyfill":"../node_modules/babel-polyfill/lib/index.js","moment":"../node_modules/moment/moment.js"}],"../src/components/addPost/AddPost.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -58907,9 +58906,11 @@ function AddPost() {
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", null, "Image"), /*#__PURE__*/_react.default.createElement("input", {
     name: "heroImage",
-    value: userInput.image || "",
-    type: "file",
-    accept: "image/png, image/jpeg",
+    value: userInput.heroImage || "",
+    type: "url",
+    placeholder: "https://example.com",
+    pattern: "https://.*",
+    size: "30",
     onChange: handleChange
   })), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("label", null, "Author"), /*#__PURE__*/_react.default.createElement("input", {
     name: "author",
@@ -69491,7 +69492,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60083" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50416" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
